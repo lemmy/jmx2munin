@@ -36,7 +36,7 @@ if [ -z "$config" -o -z "$query" -o -z "$url" ]; then
   exit 1
 fi
 
-JMX2MUNIN_DIR="/etc/munin"
+JMX2MUNIN_DIR="/etc/munin/plugin-conf.d"
 CONFIG="$JMX2MUNIN_DIR/$config"
 
 if [ "$1" = "config" ]; then
