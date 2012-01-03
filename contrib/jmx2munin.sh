@@ -44,7 +44,7 @@ if [ "$1" = "config" ]; then
     exit 0
 fi
 
-JAR="$MUNIN_LIBDIR/jmx2munin.jar"
+JAR="/usr/share/munin/jmx2munin.jar"
 CACHED="/tmp/jmx2munin"
 
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
