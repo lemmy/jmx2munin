@@ -36,7 +36,7 @@ if [ -z "$config" -o -z "$query" -o -z "$url" ]; then
   exit 1
 fi
 
-JMX2MUNIN_DIR="$MUNIN_LIBDIR/plugins"
+JMX2MUNIN_DIR="/etc/munin"
 CONFIG="$JMX2MUNIN_DIR/$config"
 
 if [ "$1" = "config" ]; then
@@ -44,7 +44,7 @@ if [ "$1" = "config" ]; then
     exit 0
 fi
 
-JAR="$JMX2MUNIN_DIR/jmx2munin.jar"
+JAR="$MUNIN_LIBDIR/jmx2munin.jar"
 CACHED="/tmp/jmx2munin"
 
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
