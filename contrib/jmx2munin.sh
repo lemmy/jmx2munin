@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Munin magic markers
+#%# family=auto
+#
 # [cassandra_nodes_in_cluster]
 # env.url service:jmx:rmi:///jndi/rmi://127.0.0.1:7199/jmxrmi
 # env.query org.apache.cassandra.*:*
