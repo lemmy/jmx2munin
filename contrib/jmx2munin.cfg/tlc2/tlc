@@ -1,43 +1,59 @@
-graph_title DiskFPSet TblCnt
-graph_vlabel tlc2_tool_fp_diskfpset0_tblcnt.value
-tlc2_tool_fp_diskfpset0_tblcnt.value.label  table count
+graph_title DiskFPSet Table Count
+graph_scale yes
+graph_category tlc
+graph_vlabel tblCnt
+tlc2_tool_fp_diskfpset0_tblcnt.label tblCnt
 
-graph_title DiskFPSet FileCnt
-graph_vlabel tlc2_tool_fp_diskfpset0_filecnt.value
-tlc2_tool_fp_diskfpset0_filecnt.value.label fileCnt
+graph_title DiskFPSet File Count
+graph_scale yes
+graph_category tlc
+graph_vlabel fileCnt
+tlc2_tool_fp_diskfpset0_filecnt.label fileCnt
 
-graph_title DiskFPSet IndexCnt
-graph_vlabel tlc2_tool_fp_diskfpset0_indexcnt.value
-tlc2_tool_fp_diskfpset0_indexcnt.value.label indexCnt
+graph_title DiskFPSet Index Count
+graph_scale yes
+graph_category tlc
+graph_vlabel indexCnt
+tlc2_tool_fp_diskfpset0_indexcnt.label indexCnt
 
-graph_title DiskFPSet DiskLookupCnt
-graph_vlabel tlc2_tool_fp_diskfpset0_disklookupcnt.value
-tlc2_tool_fp_diskfpset0_disklookupcnt.value disklookupcnt
+graph_title DiskFPSet Disk Lookup Count
+graph_scale yes
+graph_category tlc
+graph_vlabel diskLookupCnt
+tlc2_tool_fp_diskfpset0_disklookupcnt.label diskLookupCnt
 
-graph_title DiskFPSet Memory Hit Cnt
-graph_vlabel tlc2_tool_fp_diskfpset0_memhitcnt.value
-tlc2_tool_fp_diskfpset0_memhitcnt.value.label memHitCnt
+graph_title DiskFPSet Memory Hit Count
+graph_scale yes
+graph_category tlc
+graph_vlabel memHitCnt
+tlc2_tool_fp_diskfpset0_memhitcnt.label memHitCnt
 
-graph_title DiskFPSet Disk Hit Cnt
-graph_vlabel tlc2_tool_fp_diskfpset0_diskhitcnt.value
-tlc2_tool_fp_diskfpset0_diskhitcnt.value.label diskhitcnt
+graph_title DiskFPSet Disk Hit Count
+graph_scale yes
+graph_category tlc
+graph_vlabel diskHitCnt
+tlc2_tool_fp_diskfpset0_diskhitcnt.label diskHitCnt
 
-graph_title DiskFPSet Disk Write Cnt
-graph_vlabel tlc2_tool_fp_diskfpset0_diskwritecnt.value
-tlc2_tool_fp_diskfpset0_diskwritecnt.value.label diskWriteCnt
+graph_title DiskFPSet Disk Write Count
+graph_scale yes
+graph_category tlc
+graph_vlabel diskWriteCnt
+tlc2_tool_fp_diskfpset0_diskwritecnt.label diskWriteCnt
 
-graph_title DiskFPSet Disk Seek Cnt
-graph_vlabel tlc2_tool_fp_diskfpset0_diskseekcnt.value
-tlc2_tool_fp_diskfpset0_diskseekcnt.value.label diskSeekCnt
+graph_title DiskFPSet Disk Seek Count
+graph_scale yes
+graph_category tlc
+graph_vlabel diskSeekCnt
+tlc2_tool_fp_diskfpset0_diskseekcnt.label diskSeekCnt
 
 graph_title DiskFPSet GrowDisk Mark
-graph_vlabel tlc2_tool_fp_diskfpset0_growdiskmark.value
-tlc2_tool_fp_diskfpset0_growdiskmark.value.label growDiskMark
+graph_scale yes
+graph_category tlc
+graph_vlabel growDiskMark
+tlc2_tool_fp_diskfpset0_growdiskmark.label growDiskMark
 
 graph_title DiskFPSet Checkpoint Mark
-graph_vlabel tlc2_tool_fp_diskfpset0_checkpointmark.value
-tlc2_tool_fp_diskfpset0_checkpointmark.value.label checkpointMark
-
-graph_title DiskFPSet DiskLookup Cnt
-graph_vlabel tlc2_tool_fp_diskfpset0_disklookupcnt.value
-tlc2_tool_fp_diskfpset0_disklookupcnt.value.label diskLookupCnt
+graph_scale yes
+graph_category tlc
+graph_vlabel checkpointMark
+tlc2_tool_fp_diskfpset0_checkpointmark.label checkpointMark
