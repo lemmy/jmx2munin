@@ -1,9 +1,17 @@
 #!/bin/bash
+#
+# Munin magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+#
 # [cassandra_nodes_in_cluster]
-# env.url service:jmx:rmi:///jndi/rmi://127.0.0.1:7199/jmxrmi
+# env.url service:jmx:rmi:///jndi/rmi://127.0.0.1:5400/jmxrmi
 # env.query org.apache.cassandra.*:*
 # env.config cassandra/nodes_in_cluster
 # sets the 'config' and 'query' and 'url' variables for this script
+
+query='tlc2.*:*'
+config='tlc2/tlc'
 
 if [ -z "$MUNIN_LIBDIR" ]; then
     MUNIN_LIBDIR="`dirname $(dirname "$0")`"
@@ -20,7 +28,7 @@ fi
 
 if [ -z "$url" ]; then
   # this is very common so make it a default
-  url="service:jmx:rmi:///jndi/rmi://127.0.0.1:7199/jmxrmi"
+  url="service:jmx:rmi:///jndi/rmi://127.0.0.1:5400/jmxrmi"
 fi
 
 if [ -z "$config" -o -z "$query" -o -z "$url" ]; then
@@ -29,7 +37,7 @@ if [ -z "$config" -o -z "$query" -o -z "$url" ]; then
 fi
 
 JMX2MUNIN_DIR="$MUNIN_LIBDIR/plugins"
-CONFIG="$JMX2MUNIN_DIR/jmx2munin.cfg/$config"
+CONFIG="$JMX2MUNIN_DIR/$config"
 
 if [ "$1" = "config" ]; then
     cat "$CONFIG"
