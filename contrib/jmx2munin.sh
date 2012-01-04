@@ -5,7 +5,7 @@
 #%# capabilities=autoconf
 #
 
-set -x
+#set -x
 
 # cut off the part after _ in symlink name
 scriptname=${0##*/}
