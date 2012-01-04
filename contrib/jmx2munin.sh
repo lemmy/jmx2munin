@@ -99,7 +99,7 @@ esac
 fi
 
 JAR="/usr/share/munin/jmx2munin.jar"
-CACHED="/tmp/jmx2munin"
+CACHED="/tmp/jmx2munin"$jmxfuncUpper
 
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 
