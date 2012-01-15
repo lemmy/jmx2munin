@@ -1,26 +1,19 @@
 package org.vafer.jmx;
 
-import java.io.IOException;
 import java.util.Collection;
 
-import javax.management.AttributeNotFoundException;
-import javax.management.InstanceNotFoundException;
-import javax.management.IntrospectionException;
 import javax.management.MBeanAttributeInfo;
-import javax.management.MBeanException;
 import javax.management.MBeanInfo;
 import javax.management.MBeanServerConnection;
-import javax.management.MalformedObjectNameException;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
-import javax.management.ReflectionException;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-public final class Query {
+public class Query {
     
-    public void run(String url, String expression, Filter filter, Output output) throws IOException, MalformedObjectNameException, InstanceNotFoundException, ReflectionException, IntrospectionException, AttributeNotFoundException, MBeanException {
+    public void run(String url, String expression, Filter filter, Output output) throws Exception {
         JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(url));
         MBeanServerConnection connection = connector.getMBeanServerConnection();
         final Collection<ObjectInstance> mbeans = connection.queryMBeans(new ObjectName(expression), null);

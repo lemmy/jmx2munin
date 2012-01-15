@@ -65,7 +65,7 @@ public final class MuninOutput implements Output {
     }
     
     public void output(ObjectName beanName, String attributeName, Object value) {
-        Value.flatten(beanName, attributeName, value, new Value.Listener() {
+        Value.flatten(beanName, attributeName.toLowerCase(), value, new Value.Listener() {
             public void value(ObjectName beanName, String attributeName, String value) {
                 final Number v = enums.resolve(Enums.id(beanName, attributeName), value);
                 if (v != null) {

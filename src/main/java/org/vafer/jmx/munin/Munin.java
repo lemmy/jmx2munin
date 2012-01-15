@@ -9,6 +9,7 @@ import org.vafer.jmx.Filter;
 import org.vafer.jmx.ListOutput;
 import org.vafer.jmx.NoFilter;
 import org.vafer.jmx.Query;
+import org.vafer.jmx.ThreadContentionQuery;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -26,7 +27,7 @@ public final class Munin {
 
     @Parameter(names = "-enums", description = "file string to enum config")
     private String enumsPath;
-
+    
     @Parameter(names = "-attribute", description = "attributes to return")
     private List<String> attributes = new ArrayList<String>();
 
@@ -43,11 +44,15 @@ public final class Munin {
             enums.load(enumsPath);
         }
         
-        final String cmd = args.toString().toLowerCase(Locale.US);
-        if ("[list]".equals(cmd)) {
-            new Query().run(url, query, filter, new ListOutput());
+        if(query.startsWith(ThreadContentionQuery.CONTENTION)) {
+        	new ThreadContentionQuery().run(url, query, filter, new MuninOutput(enums));
         } else {
-            new Query().run(url, query, filter, new MuninOutput(enums));
+        	final String cmd = args.toString().toLowerCase(Locale.US);
+        	if ("[list]".equals(cmd)) {
+        		new Query().run(url, query, filter, new ListOutput());
+        	} else {
+        		new Query().run(url, query, filter, new MuninOutput(enums));
+        	}
         }
     }
 

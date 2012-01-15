@@ -71,6 +71,7 @@ CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class'#'$attribute
 # refresh cached file if necessary
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 
+    #java -cp /usr/local/src/jmx2munin/target/classes:/usr/local/src/.m2/repository/com/beust/jcommander/1.17/jcommander-1.17.jar org.vafer.jmx.munin.Munin \
     java -jar "$JAR" \
       -url "$url" \
       -query "$query" \
