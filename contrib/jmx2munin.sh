@@ -5,7 +5,7 @@
 #%# capabilities=autoconf
 #
 
-set -x
+#set -x
 
 # cut off the part after _ in symlink name
 scriptname=${0##*/}
@@ -19,11 +19,11 @@ package_with_dots=${package//:/.}
 
 # split of class name
 class=${package_with_class##*:}
-class_without_instance=${class%%#*}
+class_without_instance=${class%%-*}
 class_lower=${class,,}
-class_lower_without_instance=${class_lower%%#*}
+class_lower_without_instance=${class_lower%%-*}
 
-instance=${class#*#}
+instance=${class#*-}
 
 if [ $class = $instance ]; then
 	instance=
@@ -69,7 +69,7 @@ if [ "$1" = "config" ]; then
     echo graph_scale yes
     echo graph_category tlc
     echo graph_vlabel $attribute
-    echo $package_with_underscore'_'$class_lower'_'$attribute.label $attribute
+    echo $package_with_underscore'_'$class_lower_without_instance$instance'_'$attribute.label $attribute
     exit 0
 fi
 
@@ -79,8 +79,8 @@ CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class_lower_without_instance
 # refresh cached file if necessary
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 
-    #java -jar "$JAR" \
-    java -cp /usr/local/src/jmx2munin/target/classes:/usr/local/src/.m2/repository/com/beust/jcommander/1.17/jcommander-1.17.jar org.vafer.jmx.munin.Munin \
+    #java -cp /usr/local/src/jmx2munin/target/classes:/usr/local/src/.m2/repository/com/beust/jcommander/1.17/jcommander-1.17.jar org.vafer.jmx.munin.Munin \
+    java -jar "$JAR" \
       -url "$url" \
       -query "$query" \
       > $CACHED
