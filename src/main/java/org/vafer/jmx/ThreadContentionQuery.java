@@ -69,20 +69,22 @@ public class ThreadContentionQuery extends Query {
     				new Boolean(true), new Boolean(true) }, new String[] {
     				"boolean", "boolean" });
     		
-    		final String aThread = expression.substring(expression.indexOf("=") + 1, expression.length());
+    		int indexOf = expression.indexOf("=");
+			final String aThread = expression.substring(indexOf + 1, expression.length());
+			final String prefix = expression.substring(0, indexOf + 1);
     		
     		// Iterate all threads
     		for (final CompositeData thread : threads) {
     			final String threadName = (String) thread.get("threadName");
-    			if (!threadName.endsWith(aThread)) {
+    			if (!threadName.contains(aThread)) {
     				continue;
     			}
     			
     			final long waitedTime = (Long) thread.get("waitedTime");
-    			output.output(new ObjectName(expression), "waitedTime", (waitedTime / uptime) * 100);
+    			output.output(new ObjectName(prefix + threadName.toLowerCase()), "waitedTime", (waitedTime / uptime) * 100);
     			
     			final long blockedTime = (Long) thread.get("blockedTime");
-    			output.output(new ObjectName(expression), "blockedTime", (blockedTime / uptime) * 100);
+    			output.output(new ObjectName(prefix + threadName.toLowerCase()), "blockedTime", (blockedTime / uptime) * 100);
     		}
     	} finally {
     		if(connector != null)

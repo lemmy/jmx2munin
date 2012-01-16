@@ -5,7 +5,7 @@
 #%# capabilities=autoconf
 #
 
-#set -x
+set -x
 
 # cut off the part after _ in symlink name
 scriptname=${0##*/}
@@ -19,13 +19,21 @@ package_with_dots=${package//:/.}
 
 # split of class name
 class=${package_with_class##*:}
+class_without_instance=${class%%#*}
 class_lower=${class,,}
+class_lower_without_instance=${class_lower%%#*}
+
+instance=${class#*#}
+
+if [ $class = $instance ]; then
+	instance=
+fi
 
 # split of attribute part
 attribute=${jmxfunc##*::}
 
 # create query string
-query=$package_with_dots':type='$class
+query=$package_with_dots':type='$class_without_instance
 
 config='tlc2/tlc'
 
@@ -66,13 +74,13 @@ if [ "$1" = "config" ]; then
 fi
 
 JAR="/usr/share/munin/jmx2munin.jar"
-CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class
+CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class_lower_without_instance
 
 # refresh cached file if necessary
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 
-    #java -cp /usr/local/src/jmx2munin/target/classes:/usr/local/src/.m2/repository/com/beust/jcommander/1.17/jcommander-1.17.jar org.vafer.jmx.munin.Munin \
-    java -jar "$JAR" \
+    #java -jar "$JAR" \
+    java -cp /usr/local/src/jmx2munin/target/classes:/usr/local/src/.m2/repository/com/beust/jcommander/1.17/jcommander-1.17.jar org.vafer.jmx.munin.Munin \
       -url "$url" \
       -query "$query" \
       > $CACHED
@@ -81,7 +89,7 @@ if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 fi
 
 # read fresh or cached value from cache file
-ATTRIBUTE=$package_with_underscore'_'$class_lower'_'$attribute.value
+ATTRIBUTE=$package_with_underscore'_'$class_lower_without_instance$instance'_'$attribute.value
 grep $ATTRIBUTE $CACHED
 
 exit 0
