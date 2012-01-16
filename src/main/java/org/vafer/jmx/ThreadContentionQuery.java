@@ -22,19 +22,14 @@
 package org.vafer.jmx;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.management.Attribute;
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
-import javax.management.IntrospectionException;
 import javax.management.InvalidAttributeValueException;
-import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanException;
-import javax.management.MBeanInfo;
 import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
-import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import javax.management.ReflectionException;
 import javax.management.openmbean.CompositeData;
@@ -48,8 +43,6 @@ public class ThreadContentionQuery extends Query {
 	
     private static final String THREADING_OBJ_NAME = "java.lang:type=Threading";
     
-    private static final String RUNTIME_OBJ_NAME = "java.lang:type=Runtime";
-
     public void run(String url, String expression, Filter filter, Output output) throws Exception {
     	JMXConnector connector = null;
     	try {
@@ -60,7 +53,7 @@ public class ThreadContentionQuery extends Query {
     		setContentionMonitoring(connection, true);
     		
     		// get uptime of VM runtime
-    		double uptime = getUptime(connection);
+    		double uptime = (Long) connection.getAttribute(new ObjectName("java.lang:type=Runtime"), "Uptime");
     		
     		// get all thread objs
     		final ObjectName objectName = new ObjectName(
@@ -92,21 +85,6 @@ public class ThreadContentionQuery extends Query {
     	}
     }
     
-    private Long getUptime(MBeanServerConnection connection) throws AttributeNotFoundException, InstanceNotFoundException, MBeanException, ReflectionException, IOException, MalformedObjectNameException, NullPointerException, IntrospectionException {
-        final Collection<ObjectInstance> mbeans = connection.queryMBeans(new ObjectName(RUNTIME_OBJ_NAME), null);
-        for(ObjectInstance mbean : mbeans) {
-            final ObjectName mbeanName = mbean.getObjectName();
-            final MBeanInfo mbeanInfo = connection.getMBeanInfo(mbeanName);
-            final MBeanAttributeInfo[] attributes = mbeanInfo.getAttributes();
-            for (final MBeanAttributeInfo attribute : attributes) {
-                final String attributeName = attribute.getName();
-				if (attributeName.equals("Uptime")) {
-                	return (Long) connection.getAttribute(mbeanName, attributeName);
-                }
-            }
-        }
-        return Long.valueOf(-1);
-	}
 
 	private static final String CONTENTION_ATTR = "ThreadContentionMonitoringEnabled";
     
