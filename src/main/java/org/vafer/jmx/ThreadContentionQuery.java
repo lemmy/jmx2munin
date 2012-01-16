@@ -51,37 +51,43 @@ public class ThreadContentionQuery extends Query {
     private static final String RUNTIME_OBJ_NAME = "java.lang:type=Runtime";
 
     public void run(String url, String expression, Filter filter, Output output) throws Exception {
-        final JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(url));
-        final MBeanServerConnection connection = connector.getMBeanServerConnection();
-
-        // activate contention monitoring
-		setContentionMonitoring(connection, true);
-        
-		// get uptime of VM runtime
-		double uptime = getUptime(connection);
-		
-        // get all thread objs
-		final ObjectName objectName = new ObjectName(
-				THREADING_OBJ_NAME);
-		final CompositeData[] threads = (CompositeData[]) connection.invoke(objectName, "dumpAllThreads", new Object[] {
-				new Boolean(true), new Boolean(true) }, new String[] {
-				"boolean", "boolean" });
-        
-		final String aThread = expression.substring(expression.indexOf("=") + 1, expression.length());
-
-		// Iterate all threads
-        for (final CompositeData thread : threads) {
-        	final String threadName = (String) thread.get("threadName");
-			if (!threadName.endsWith(aThread)) {
-        		continue;
-        	}
-        	
-        	final long waitedTime = (Long) thread.get("waitedTime");
-			output.output(new ObjectName(expression), "waitedTime", (waitedTime / uptime) * 100);
-        	
-        	final long blockedTime = (Long) thread.get("blockedTime");
-			output.output(new ObjectName(expression), "blockedTime", (blockedTime / uptime) * 100);
-        }
+    	JMXConnector connector = null;
+    	try {
+    		connector = JMXConnectorFactory.connect(new JMXServiceURL(url));
+    		final MBeanServerConnection connection = connector.getMBeanServerConnection();
+    		
+    		// activate contention monitoring
+    		setContentionMonitoring(connection, true);
+    		
+    		// get uptime of VM runtime
+    		double uptime = getUptime(connection);
+    		
+    		// get all thread objs
+    		final ObjectName objectName = new ObjectName(
+    				THREADING_OBJ_NAME);
+    		final CompositeData[] threads = (CompositeData[]) connection.invoke(objectName, "dumpAllThreads", new Object[] {
+    				new Boolean(true), new Boolean(true) }, new String[] {
+    				"boolean", "boolean" });
+    		
+    		final String aThread = expression.substring(expression.indexOf("=") + 1, expression.length());
+    		
+    		// Iterate all threads
+    		for (final CompositeData thread : threads) {
+    			final String threadName = (String) thread.get("threadName");
+    			if (!threadName.endsWith(aThread)) {
+    				continue;
+    			}
+    			
+    			final long waitedTime = (Long) thread.get("waitedTime");
+    			output.output(new ObjectName(expression), "waitedTime", (waitedTime / uptime) * 100);
+    			
+    			final long blockedTime = (Long) thread.get("blockedTime");
+    			output.output(new ObjectName(expression), "blockedTime", (blockedTime / uptime) * 100);
+    		}
+    	} finally {
+    		if(connector != null)
+    			connector.close();
+    	}
     }
     
     private Long getUptime(MBeanServerConnection connection) throws AttributeNotFoundException, InstanceNotFoundException, MBeanException, ReflectionException, IOException, MalformedObjectNameException, NullPointerException, IntrospectionException {
