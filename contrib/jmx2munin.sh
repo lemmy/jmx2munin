@@ -66,7 +66,7 @@ if [ "$1" = "config" ]; then
 fi
 
 JAR="/usr/share/munin/jmx2munin.jar"
-CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class'#'$attribute
+CACHED="/tmp/jmx2munin_"$package_with_dots'.'$class
 
 # refresh cached file if necessary
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
