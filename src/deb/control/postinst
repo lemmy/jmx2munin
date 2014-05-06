@@ -1,1 +1,131 @@
 #!/bin/sh
+
+# activate extra munin stats
+mkdir -p /etc/munin/plugins
+# for jmx plugin to work, the vm has to be started with -D properties to listen on port 5400
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ClassesLoaded
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ClassesLoadedTotal
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ClassesUnloaded
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_CompilationTimeTotal
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_GCCount
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_GCTime
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_CurrentThreadCpuTime
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_CurrentThreadUserTime
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryAllocatedHeap
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryAllocatedNonHeap
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryEdenPeak
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryEdenUsage
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryEdenUsagePostGC
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryObjectsPending
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryPermGenPeak
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryPermGenUsage
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryPermGenUsagePostGC
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemorySurvivorPeak
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemorySurvivorUsage
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemorySurvivorUsagePostGC
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryTenuredGenPeak
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryTenuredGenUsage
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemoryTenuredGenUsagePostGC
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemorythresholdPostGCCount
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_MemorythresholdUsageCount
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ProcessorsAvailable
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_Threads
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ThreadsDaemon
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ThreadsDeadlocked
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ThreadsPeak
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_ThreadsStartedTotal
+ln -s /usr/share/munin/plugins/jmx_ /etc/munin/plugins/jmx_Uptime
+# activate DiskFPSet0 stats
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::filecnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::tblcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::indexcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::disklookupcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::diskwritecnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::diskhitcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::diskseekcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::memhitcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::growdiskmark
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::checkpointmark
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::bucketcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::tblcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::overallcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::flushtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::tblload
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::diskseekcache
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::diskseekrate
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::collisionbucketcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::collisionratio
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::loadfactor
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::maxtblcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::readerwritercnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet0::sizeof
+# activate DiskFPSet1 stats
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::filecnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::tblcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::indexcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::disklookupcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::diskwritecnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::diskhitcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::diskseekcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::memhitcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::growdiskmark
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::checkpointmark
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::bucketcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::tblcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::overallcapacity
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::flushtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::tblload
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::diskseekcache
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::diskseekrate
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::collisionbucketcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::collisionratio
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::loadfactor
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::maxtblcnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::readerwritercnt
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:fp:DiskFPSet1::sizeof
+# activate ModelChecker stats
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::distinctstatesgenerated
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::progress
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::distinctstatesgeneratedperminute
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::statequeuesize
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::statesgenerated
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::statesgeneratedperminute
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::workercount
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_tlc2:tool:ModelChecker::averageblockcnt
+# Lock contention
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-000::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-000::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-001::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-001::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-002::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-002::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-003::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-003::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-004::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-004::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-005::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-005::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-006::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-006::blockedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-007::waitedtime
+ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vafer:jmx:contention:TLCWorkerThread-007::blockedtime
+
+# Replace localhost.localdomain string in config file
+sed -i 's/localhost.localdomain/tlc/g' /etc/munin/munin.conf
+
+# restart munin after config changes
+service munin-node restart
+
+# allow everybody to see munin stats
+echo "RedirectMatch ^/$ /munin
+Alias /munin /var/cache/munin/www
+<Directory /var/cache/munin/www>
+		Require all granted
+		# This is <= 2.2
+        #Order allow,deny
+        #Allow from all
+        Options None
+</Directory>
+" > /etc/munin/apache.conf
+service apache2 restart
+
