@@ -129,3 +129,17 @@ Alias /munin /var/cache/munin/www
 " > /etc/munin/apache.conf
 service apache2 restart
 
+# Create a temporary index file to tell the user that TLC stats will show up after the first munin run. Let munin own it so that subsequent munin runs won't fail
+test -e /var/cache/munin/www/index.html || touch /var/cache/munin/www/index.html && chown munin:munin /var/cache/munin/www/index.html && cat > /var/cache/munin/www/index.html << EOF
+<html>
+	<head></head>
+	<body>
+		<h3>
+			Expect to see model checking statistics to appear in a few (usually five) minutes.
+			<br>
+			TLC model checker output might already be available at <a href=/MC.out>MC.out</a> and <a href=/MC.err>MC.err.</a>
+		</h3>
+	</body>
+</html>
+EOF
+
