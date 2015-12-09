@@ -113,6 +113,20 @@ ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vaf
 # Replace localhost.localdomain string in config file
 sed -i 's/localhost.localdomain/tlc/g' /etc/munin/munin.conf
 
+# Tell munin to send out warnings if the disk gets full
+echo "
+contacts me
+contact.me.command mail -s 'System notification from a host running TLC for you.' -r TLC_-_The_friendly_model_checker root
+contact.me.always_send warning critical
+" > /etc/munin/munin-conf.d/disk.conf
+
+echo "
+df._dev_xvda1.warning 70
+df._dev_xvda1.critical 90
+df._dev_xvdb.warning 70
+df._dev_xvdb.critical 90
+" >> /etc/munin/munin.conf
+
 # restart munin after config changes
 service munin-node restart
 
