@@ -117,7 +117,7 @@ sed -i 's/localhost.localdomain/tlc/g' /etc/munin/munin.conf
 echo "
 contacts me
 contact.me.command mail -s 'System notification from a host running TLC for you.' -r TLC_-_The_friendly_model_checker root
-contact.me.always_send warning critical
+contact.me.always_send critical
 " > /etc/munin/munin-conf.d/disk.conf
 
 ## AWS has /Dev/xvd* and Azure /dev/sd*
@@ -128,10 +128,10 @@ df._dev_xvda1.warning 70
 df._dev_xvda1.critical 90
 df._dev_xvdb.warning 70
 df._dev_xvdb.critical 90
-df._dev_sda.warning 70
-df._dev_sda.critical 90
-df._dev_sdb.warning 70
-df._dev_sdb.critical 90
+df._dev_sda1.warning 70
+df._dev_sda1.critical 90
+df._dev_sdb1.warning 70
+df._dev_sdb1.critical 90
 " >> /etc/munin/munin.conf
 
 # restart munin after config changes
