@@ -120,11 +120,18 @@ contact.me.command mail -s 'System notification from a host running TLC for you.
 contact.me.always_send warning critical
 " > /etc/munin/munin-conf.d/disk.conf
 
+## AWS has /Dev/xvd* and Azure /dev/sd*
+## (adding an alarm for a non-existing
+## disk shouldn't cause a problem).
 echo "
 df._dev_xvda1.warning 70
 df._dev_xvda1.critical 90
 df._dev_xvdb.warning 70
 df._dev_xvdb.critical 90
+df._dev_sda.warning 70
+df._dev_sda.critical 90
+df._dev_sdb.warning 70
+df._dev_sdb.critical 90
 " >> /etc/munin/munin.conf
 
 # restart munin after config changes
