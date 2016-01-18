@@ -5,4 +5,4 @@ Priority: low
 Architecture: all
 Description: [[description]]
 Maintainer: tlaplus.net@lemmster.de
-Depends: munin-plugins-java, munin, munin-node, apache2
+Depends: munin-plugins-java, munin, munin-node, apache2, ssl-cert, postfix, heirloom-mailx

@@ -137,6 +137,13 @@ df._dev_sdb1.critical 90
 # restart munin after config changes
 service munin-node restart
 
+# Generate a self signed SSL certificate
+make-ssl-cert generate-default-snakeoil
+
+# Configure apache2 ssl
+a2enmod ssl
+a2ensite default-ssl
+
 # allow everybody to see munin stats
 echo "RedirectMatch ^/$ /munin
 Alias /munin /var/cache/munin/www
