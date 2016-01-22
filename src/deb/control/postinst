@@ -113,12 +113,6 @@ ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vaf
 # Replace localhost.localdomain string in config file
 sed -i 's/localhost.localdomain/tlc/g' /etc/munin/munin.conf
 
-# Silence warning mails send directly after instance startup
-# by ignoring UNKNOWN states
-echo "
-ignore_unknown yes
-" > /etc/munin/munin.conf
-
 # Tell munin to send out warnings if the disk gets full
 echo "
 contacts me
