@@ -132,6 +132,7 @@ df._dev_sda1.warning 70
 df._dev_sda1.critical 90
 df._dev_sdb1.warning 70
 df._dev_sdb1.critical 90
+unknown_limit 1000
 " >> /etc/munin/munin.conf
 
 # restart munin after config changes
