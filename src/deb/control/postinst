@@ -113,12 +113,23 @@ ln -s /usr/share/munin/plugins/jmx2munin.sh /etc/munin/plugins/jmx2munin_org:vaf
 # Replace localhost.localdomain string in config file
 sed -i 's/localhost.localdomain/tlc/g' /etc/munin/munin.conf
 
-# Tell munin to send out warnings if the disk gets full
-echo "
-contacts me
-contact.me.command mail -s 'System notification from a host running TLC for you.' -r TLC_-_The_friendly_model_checker root
-contact.me.always_send critical
-" > /etc/munin/munin-conf.d/disk.conf
+## Tell munin to send out warnings if the disk gets full
+## Munin tends to spam the user when it fails to obtain
+## sensor readings directly after system boot. A user then
+## first receives a mail with UNKNOWN warnings followed
+## by another mail five minutes later with the corresponding
+## OKs. The contact feature appears to be primarily used
+## to feed data into Nagios which has a much more powerful
+## notification mechanism. For us this means we are on our
+## own. The sensible thing is probably to write a custom
+## script that filters UNKNOWN and UNKNOWN -> OK mails,
+## but I don't want to open that can of worms. Thus,
+## lets live without email notification for the moment.
+#echo "
+#contacts me
+#contact.me.command mail -s 'System notification from a host running TLC for you.' -r TLC_-_The_friendly_model_checker root
+#contact.me.always_send critical
+#" > /etc/munin/munin-conf.d/disk.conf
 
 ## AWS has /Dev/xvd* and Azure /dev/sd*
 ## (adding an alarm for a non-existing
