@@ -157,6 +157,10 @@ a2enmod ssl
 a2ensite default-ssl
 
 # allow everybody to see munin stats
+# with apache 2.4
+sed -i.bak 's/Require local/Require all granted/g' /etc/munin/apache24.conf
+
+# allow everybody to see munin stats
 echo "RedirectMatch ^/$ /munin
 Alias /munin /var/cache/munin/www
 <Directory /var/cache/munin/www>
