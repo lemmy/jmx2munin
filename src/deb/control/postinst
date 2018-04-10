@@ -181,7 +181,7 @@ test -e /var/cache/munin/www/index.html || touch /var/cache/munin/www/index.html
 		<h3>
 			Expect to see model checking statistics to appear in a few (usually five) minutes.
 			<br>
-			TLC model checker output might already be available at <a href=/MC.out>MC.out</a> and <a href=/MC.err>MC.err.</a>
+			TLC model checker output might already be available at <a href=/MC.txt>MC.out</a> and <a href=/MC.err>MC.err.</a>
 		</h3>
 	</body>
 </html>
